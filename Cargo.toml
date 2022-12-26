@@ -14,7 +14,7 @@ homepage = "https://github.com/cs2dsb/itm_logger.rs"
 
 [dependencies]
 cortex-m = { version = "0.6.2", optional = true }
-log = { version = "0.4.6", default-features = false, optional = true }
+log = { version = "0.4", default-features = false, optional = true }
 
 [features]
 default = [ "logging" ] #Set up this way so it's possible to disable logging and have the log macros expand to noop

@@ -1,18 +1,8 @@
 use cortex_m::{
-    iprintln,
-    peripheral::{
-        ITM,
-        TPIU,
-    },
-    interrupt,
+    interrupt, iprintln,
+    peripheral::{ITM, TPIU},
 };
-use log::{
-    Log,
-    Level,
-    Metadata,
-    Record,
-    SetLoggerError
-};
+use log::{Level, Log, Metadata, Record, SetLoggerError};
 
 const STIM_PORT_NUMBER: usize = 0;
 
@@ -49,7 +39,7 @@ impl Log for ItmLogger {
             return false;
         }
 
-        #[cfg(feature = "perform-enabled-checks")] 
+        #[cfg(feature = "perform-enabled-checks")]
         unsafe {
             use cortex_m::peripheral::DCB;
 
@@ -61,7 +51,7 @@ impl Log for ItmLogger {
             // Check if DEBUGEN is set
             if !DCB::is_debugger_attached() {
                 return false;
-            }            
+            }
 
             // Check if tracing is enabled
             if itm.tcr.read() & ITM_TCR_ENABLE_MASK == 0 {
@@ -87,7 +77,8 @@ impl Log for ItmLogger {
                         "{:<5} [{}] {}",
                         record.level(),
                         record.target(),
-                        record.args());
+                        record.args()
+                    );
                 });
             }
         }
@@ -103,9 +94,7 @@ static mut LOGGER: ItmLogger = ItmLogger {
 
 /// Initialise the logger and set the log level to the provided `log_level`
 pub fn init_with_level(log_level: Level) -> Result<(), SetLoggerError> {
-    interrupt::free(|_| unsafe {
-        log::set_logger(&LOGGER)
-    })?;
+    interrupt::free(|_| unsafe { log::set_logger(&LOGGER) })?;
     log::set_max_level(log_level.to_level_filter());
     Ok(())
 }

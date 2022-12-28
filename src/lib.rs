@@ -35,21 +35,14 @@
 //! * Stim port we're using is enabled (ITM::TER[PORT])
 
 #[cfg(feature = "logging")]
-pub use log::{
-    log,
-    Level,
-};
+pub use log::{log, Level};
 
 #[cfg(feature = "logging")]
 mod logger;
 
 #[cfg(feature = "logging")]
 pub use logger::{
-    logger_init,
-    init_with_level,
-    update_tpiu_baudrate,
-    disable_logger,
-    enable_logger,
+    disable_logger, enable_logger, init_with_level, logger_init, update_tpiu_baudrate,
 };
 
 /// A macro that accepts logging syntax but does no logging. It `let _ =` each of the parameters
@@ -93,20 +86,20 @@ pub use self::stub as trace;
 
 /// Re-export of `log::error` if logging feature is enabled, `stub` if not
 #[cfg(feature = "logging")]
-pub use log::error as error;
+pub use log::error;
 
 /// Re-export of `log::warn` if logging feature is enabled, `stub` if not
 #[cfg(feature = "logging")]
-pub use log::warn as warn;
+pub use log::warn;
 
 /// Re-export of `log::info` if logging feature is enabled, `stub` if not
 #[cfg(feature = "logging")]
-pub use log::info as info;
+pub use log::info;
 
 /// Re-export of `log::debug` if logging feature is enabled, `stub` if not
 #[cfg(feature = "logging")]
-pub use log::debug as debug;
+pub use log::debug;
 
 /// Re-export of `log::trace` if logging feature is enabled, `stub` if not
 #[cfg(feature = "logging")]
-pub use log::trace as trace;
+pub use log::trace;
